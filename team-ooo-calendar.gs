@@ -50,19 +50,35 @@ function setup() {
 /**
  * Get user's name, from contacts.
  * Best effort for getting a nice name. The app will access
- * the contacts of the person who runs it.
+ * the contacts directory visible for the person who runs it
  *
  * @returns {String} FullName, none.
  */
 function getNiceName(user){
   var email = user.getEmail();
+  let name = '';
+  
+  /* ContactsApp.getContact is deprecated and won't work anymore
   var contact = ContactsApp.getContact(email);
-  let name = ''
-
   // If user has themselves in their contacts, return their name
-  if (contact) {
+    if (contact) {
     // Prefer full name, if that's available
     name = contact.getFullName();
+  } */
+  
+  // for this, People API needs to be added to Services on the left:
+  var people = People.People.searchDirectoryPeople({
+    query: email,
+    readMask: "names",
+    pageSize: 1,
+    sources: ["DIRECTORY_SOURCE_TYPE_DOMAIN_PROFILE"]
+  });
+ 
+  if (people.results && people.results.length > 0) {
+    let person = people.results[0].person;
+    if (person.names && person.names.length > 0) {
+      name = person.names[0].displayName;
+    }
   }
   return name;
 }
