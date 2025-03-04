@@ -31,7 +31,7 @@ let TEAM_CALENDAR_ID = '<calendar_id>@group.calendar.google.com';
 // Ensure the group has less than 500 members to avoid timeouts.
 let GROUP_EMAIL = '<group_name>@example.org';
 
-let KEYWORDS = ['vacation', 'ooo', 'out of office', 'offline', 'holiday', 'holidays', 'pto', 'leave'];
+let KEYWORDS = ['vacation', 'ooo', 'out of office', 'offline', 'holiday', 'holidays', 'pto', 'leave', 'recharge', 'absent du bureau'];
 let MONTHS_IN_ADVANCE = 6;
 
 /**
